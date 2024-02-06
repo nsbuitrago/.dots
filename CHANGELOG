@@ -2,3 +2,5 @@
 
 - init: setup vanilla nixos config with GNOME
 - add: install additional packages (nvim, firefox, python, cargo, tailscale, ...)
+- add: nvidia drivers and cuda support
+- add: zsh as default shell for all users
