@@ -1,0 +1,4 @@
+# 2024-02-06
+
+- init: setup vanilla nixos config with GNOME
+- add: install additional packages (nvim, firefox, python, cargo, tailscale, ...)
