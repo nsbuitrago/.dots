@@ -12,10 +12,10 @@
 
 - [ ] setup GitLab CI for building and testing new nix configurations
 - [x] setup nvim
-- [ ] add obsidian
-- [ ] setup kitty or wezterm?
+- [ ] add obsidian (setup electron from instable packages)
+- [x] setup kitty
 - [x] add tmux to system packages
-- [ ] setup flakes and home manager
+- [x] setup flakes and home manager
 - [ ] move nvim config to home manager
 - [x] setup nvidia drivers + cuda support
 - [x] setup zsh + starship
