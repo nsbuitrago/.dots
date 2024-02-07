@@ -1,5 +1,5 @@
-# NSB's NixOS Configuration
-# Help is available in the configuration.nix(5) man page
+# Edit this configuration file to define what should be installed on
+# your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
@@ -75,6 +75,24 @@
     #media-session.enable = true;
   };
 
+  # Nvidia support
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+
+  services.xserver.videoDrivers = ["nvidia"];
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    open = false;
+    nvidiaSettings = false;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -94,6 +112,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+     tmux
      neovim
      git
      ripgrep
@@ -103,10 +122,10 @@
      gh
      wget
      tailscale
-     python3
      cargo
      gcc
      gnumake
+     starship
   ];
 
   # tailscale
@@ -118,6 +137,10 @@
     allowedUDPPorts = [ config.services.tailscale.port ];
     allowedTCPPorts = [ 22 ];
   };
+
+  # zsh
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
