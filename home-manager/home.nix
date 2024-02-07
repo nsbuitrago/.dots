@@ -49,7 +49,11 @@
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
-  programs.git.enable = true;
+  programs.git = {
+    enable = true;
+    userName = "NSBuitrago";
+    userEmail = "nsb5@rice.edu";
+  };
 
   programs.kitty = {
     enable = true;
