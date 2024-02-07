@@ -1,3 +1,8 @@
+# 2024-02-07
+
+- add: setup flakes + home-manager, first home-manager config for git
+- add: new terminal (kitty)
+
 # 2024-02-06
 
 - init: setup vanilla nixos config with GNOME
