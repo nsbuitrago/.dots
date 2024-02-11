@@ -1,0 +1,12 @@
+image: nixos/nix
+
+variables:
+  NIXOS_VERSION: "23.11"
+
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - nixos-rebuild dry-build --flake .#odinson

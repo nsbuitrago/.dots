@@ -1,3 +1,10 @@
+# 2024-02-10
+
+- add: neovim/zsh configuration embeded in home-manager config
+- add: garbage collection of old nixos generations
+- add: gitlab ci for testing new nixos config builds
+- add: use variables for username and hostname
+
 # 2024-02-07
 
 - add: setup flakes + home-manager, first home-manager config for git

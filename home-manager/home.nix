@@ -5,6 +5,7 @@
   lib,
   config,
   pkgs,
+  nsbUser,
   ...
 }: {
   # You can import other home-manager modules here
@@ -13,7 +14,6 @@
     # inputs.nix-colors.homeManagerModule
 
     # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
   ];
 
   nixpkgs = {
@@ -39,8 +39,8 @@
   };
 
   home = {
-    username = "nsb";
-    homeDirectory = "/home/nsb";
+    username = "${nsbUser}";
+    homeDirectory = "/home/${nsbUser}";
   };
 
   # Add stuff for your user as you see fit:
@@ -56,12 +56,8 @@
     userEmail = "nsb5@rice.edu";
   };
 
-  # Shell and terminal
-
-  # zsh already enabled by system. Will include config here later
-  # programs.zsh = {
-    # enable = true;
-  # };
+  # zsh config
+  home.file.".zshrc".source = ./dotfiles/.zshrc;
 
   programs.kitty = {
     enable = true;
@@ -74,15 +70,15 @@
   };
 
   # Neovim editor
-  # TODO: split up config into multiple files for better structure
-
-  # neovim enabled at system level
   programs.neovim = {
     defaultEditor = true;
   };
 
+  # soft dependencies for nvim configuration
   programs.ripgrep.enable = true;
   programs.fzf.enable = true;
+
+  home.file.".config/nvim".source = ./dotfiles/.config/nvim;
 
   # browser
 

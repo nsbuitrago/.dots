@@ -5,6 +5,8 @@
   lib,
   config,
   pkgs,
+  nsbUser,
+  odinsonHostname,
   ...
 }: {
   # You can import other NixOS modules here
@@ -63,7 +65,7 @@
   };
 
   # Set your hostname
-  networking.hostName = "nsb";
+  networking.hostName = "${odinsonHostname}";
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
@@ -151,7 +153,7 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.nsb = {
+  users.users."${nsbUser}" = {
     isNormalUser = true;
     description = "nsb";
     extraGroups = [ "networkmanager" "wheel" ];
@@ -187,24 +189,12 @@
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
 
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
