@@ -49,15 +49,44 @@
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
+
   programs.git = {
     enable = true;
     userName = "NSBuitrago";
     userEmail = "nsb5@rice.edu";
   };
 
+  # Shell and terminal
+
+  # zsh already enabled by system. Will include config here later
+  # programs.zsh = {
+    # enable = true;
+  # };
+
   programs.kitty = {
     enable = true;
+    theme = "Gruvbox Material Dark Hard";
   };
+
+  programs.starship = { 
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  # Neovim editor
+  # TODO: split up config into multiple files for better structure
+
+  # neovim enabled at system level
+  programs.neovim = {
+    defaultEditor = true;
+  };
+
+  programs.ripgrep.enable = true;
+  programs.fzf.enable = true;
+
+  # browser
+
+  programs.firefox.enable = true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";

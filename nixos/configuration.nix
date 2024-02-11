@@ -155,9 +155,6 @@
     isNormalUser = true;
     description = "nsb";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      firefox
-    ];
   };
 
   # List packages installed in system profile. To search, run:
@@ -166,17 +163,14 @@
      tmux
      neovim
      git
-     ripgrep
-     fzf
      btop
-     glab
-     gh
+     # glab
+     # gh
      wget
      tailscale
      cargo
      gcc
      gnumake
-     starship
   ];
 
   # tailscale
