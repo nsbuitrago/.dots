@@ -13,5 +13,5 @@ build_nixos_config:
     export NIX_CONFIG="experimental-features = nix-command flakes"
   script:
     - nix flake update
-    - nix build .#nixosConfigurations.#${HOSTNAME}.config.system.build.toplevel --dry-run
+    - nix build .#nixosConfigurations.${HOSTNAME}.config.system.build.toplevel --dry-run
     - nix build .#homeConfigurations.${USERNAME}@${HOSTNAME}.activationPackage
