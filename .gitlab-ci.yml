@@ -10,6 +10,7 @@ build_nixos_config:
   stage: build
   image: nixos/nix
   script:
+    - export NIX_CONFIG="experimental-features=nix-command flakes"
     - nix flake update
     - nixos-rebuild build --flake --dry-run .#${HOSTNAME}
     - nix build .#homeConfigurations.${USERNAME}@${HOSTNAME}
