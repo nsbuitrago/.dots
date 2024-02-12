@@ -11,30 +11,10 @@
 }: {
   # You can import other NixOS modules here
   imports = [
-    # If you want to use modules from other flakes (such as nixos-hardware):
-    # inputs.hardware.nixosModules.common-cpu-amd
-    # inputs.hardware.nixosModules.common-ssd
-
-    # You can also split up your configuration and import pieces of it here:
-    # ./users.nix
-
-    # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
   ];
 
   nixpkgs = {
-    # You can add overlays here
-    overlays = [
-      # If you want to use overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
-    ];
     # Configure your nixpkgs instance
     config = {
       allowUnfree = true;
@@ -71,12 +51,6 @@
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -126,10 +100,6 @@
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
 
   # Nvidia support
@@ -150,10 +120,7 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # nsb user
   users.users."${nsbUser}" = {
     isNormalUser = true;
     description = "nsb";
@@ -167,8 +134,6 @@
      neovim
      git
      btop
-     # glab
-     # gh
      wget
      tailscale
      cargo
@@ -187,6 +152,7 @@
      ncurses5
      stdenv.cc
      binutils
+     python3
   ];
 
   # tailscale
@@ -203,6 +169,7 @@
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
 
+  # garbage collection
   nix.gc = {
     automatic = true;
     dates = "weekly";

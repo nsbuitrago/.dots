@@ -1,5 +1,16 @@
+
+# N N         NB B B B B B
+# N  N        NB         B
+# N   N       NB         B
+# N    N      NB         B
+# N     N     NB B B B B B
+# N      N    NB         B
+# N       N   NB         B
+# N        N  NB         B
+# N         N NB B B B B B
+
 {
-  description = "NSB's NixOS Configuration";
+  description = "NSBuitrago's NixOS Configuration";
 
   inputs = {
     # Nixpkgs
@@ -8,13 +19,6 @@
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    # Add any other flake you might need
-    # hardware.url = "github:nixos/nixos-hardware";
-
-    # Shameless plug: looking for a way to nixify your themes and make
-    # everything match nicely? Try nix-colors!
-    # nix-colors.url = "github:misterio77/nix-colors";
   };
 
   outputs = {
@@ -32,7 +36,7 @@
     nixosConfigurations = {
       odinson = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs nsbUser odinsonHostname;};
-        # > Our main nixos configuration file <
+        # > main nixos configuration file <
         modules = [./nixos/configuration.nix];
       };
     };
@@ -43,7 +47,7 @@
       "${nsbUser}@${odinsonHostname}" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs nsbUser;};
-        # > Our main home-manager configuration file <
+        # > main home-manager configuration file <
         modules = [./home-manager/home.nix];
       };
     };
