@@ -1,12 +1,15 @@
-image: nixos/nix
-
+# test nixos config build
 variables:
-  NIXOS_VERSION: "23.11"
+  USERNAME: "nsb"
+  HOSTNAME: "odinson"
 
 stages:
   - build
 
-build:
+build_nixos_config:
   stage: build
+  image: nixos/nix
   script:
-    - nixos-rebuild dry-build --flake .#odinson
+    - nix flake update
+    - nixos-rebuild build --flake --dry-run .#${HOSTNAME}
+    - nix build .#homeConfigurations.${USERNAME}@${HOSTNAME}
