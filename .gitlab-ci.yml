@@ -9,7 +9,9 @@ stages:
 build_nixos_config:
   stage: build
   image: nixos/nix
+  before_script:
+    export NIX_CONFIG="experimental-features = nix-command flakes"
   script:
     - nix flake update
-    - nixos-rebuild build --flake --dry-run .#${HOSTNAME}
-    - nix build .#homeConfigurations.${USERNAME}@${HOSTNAME}
+    - nix build .#nixosConfigurations.${HOSTNAME}.config.system.build.toplevel --dry-run
+    - nix build .#homeConfigurations.${USERNAME}@${HOSTNAME}.activationPackage
