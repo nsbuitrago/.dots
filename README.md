@@ -23,6 +23,7 @@ think this is a much better method compared to using nix. For other configuratio
 - [x] setup variables for usernames and hostnames
 - [ ] add modules for home-manager config
 - [x] setup GitLab CI for building and testing new nix configurations
+    - [ ] bug: trouble testing nix builds due to no nix available from nixos/nix image
 - [ ] add obsidian (setup electron from instable packages)
 - [x] move nvim config to home manager
 - [x] move zsh config to home manager

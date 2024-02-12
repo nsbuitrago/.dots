@@ -1,18 +1,26 @@
+# 2024-02-12
+
+Fix GitLab CI for testing nixos config builds
+
+# 2024-02-11
+
+- Fix cuda support
+
 # 2024-02-10
 
-- add: neovim/zsh configuration embeded in home-manager config
-- add: garbage collection of old nixos generations
-- add: gitlab ci for testing new nixos config builds
-- add: use variables for username and hostname
+- Neovim/zsh configuration embeded in home-manager config
+- Add garbage collection of old nixos generations
+- Add gitlab ci for testing new nixos config builds
+- Use variables for username and hostname
 
 # 2024-02-07
 
-- add: setup flakes + home-manager, first home-manager config for git
-- add: new terminal (kitty)
+- Setup flakes + home-manager, first home-manager config for git
+- Include kitty package
 
 # 2024-02-06
 
-- init: setup vanilla nixos config with GNOME
-- add: install additional packages (nvim, firefox, python, cargo, tailscale, ...)
-- add: nvidia drivers and cuda support
-- add: zsh as default shell for all users
+- Setup vanilla nixos config with GNOME
+- Add additional packages (nvim, firefox, python, cargo, tailscale, ...)
+- Setup nvidia drivers and cuda support (cuda support not tested)
+- Use zsh as default shell for all users

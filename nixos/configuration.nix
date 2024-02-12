@@ -167,13 +167,12 @@
      neovim
      git
      btop
-     # glab
-     # gh
      wget
      tailscale
      cargo
      gcc
      gnumake
+     python3
      cudatoolkit
      linuxPackages.nvidia_x11
      cudaPackages.cudnn
