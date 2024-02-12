@@ -17,7 +17,9 @@ of this config and sourced. This way, they are easy to update and backup in this
 think this is a much better method compared to using nix. For other configurations outside of these,
 (e.g., firefox), the Nix way makes more sense.
 
+- [x] add cuda support
 - [x] add garbage collection for generations older than 7d
+    -[x] fix problem with gc not being found (should be nix.gc)
 - [x] setup variables for usernames and hostnames
 - [ ] add modules for home-manager config
 - [x] setup GitLab CI for building and testing new nix configurations
@@ -26,5 +28,8 @@ think this is a much better method compared to using nix. For other configuratio
 - [x] move zsh config to home manager
 - [ ] setup wallpaper in config
 - [ ] fix suspend bug (try adjusting nvidia power management config for this)
+- [x] add python3 to system level packages
+- [x] bug: kitty icon not available, not found from quick search in gnome
+    - This seems to have fixed itself, however, sometimes kitty has trouble when launching
 
 NSBuitrago: <nsb5@rice.edu>

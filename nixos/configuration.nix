@@ -37,8 +37,9 @@
     ];
     # Configure your nixpkgs instance
     config = {
-      # Disable if you don't want unfree packages
       allowUnfree = true;
+      cudaSupport = true;
+      cudaVersion = "12";
     };
   };
 
@@ -107,8 +108,8 @@
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
   };
 
   # Enable CUPS to print documents.
@@ -173,6 +174,19 @@
      cargo
      gcc
      gnumake
+     cudatoolkit
+     linuxPackages.nvidia_x11
+     cudaPackages.cudnn
+     libGLU
+     libGLU
+     xorg.libXi
+     xorg.libXmu
+     xorg.libXv
+     xorg.libXrandr
+     zlib
+     ncurses5
+     stdenv.cc
+     binutils
   ];
 
   # tailscale
@@ -189,7 +203,7 @@
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
 
-  gc = {
+  nix.gc = {
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 7d";
