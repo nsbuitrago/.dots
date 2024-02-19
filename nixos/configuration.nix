@@ -142,6 +142,7 @@
      cargo
      gcc
      gnumake
+     python3
      cudatoolkit
      linuxPackages.nvidia_x11
      cudaPackages.cudnn

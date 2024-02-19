@@ -1,12 +1,17 @@
-image: nixos/nix
-
+# test nixos config build
 variables:
-  NIXOS_VERSION: "23.11"
+  USERNAME: "nsb"
+  HOSTNAME: "odinson"
 
 stages:
   - build
 
-build:
+build_nixos_config:
   stage: build
+  image: nixos/nix
+  before_script:
+    export NIX_CONFIG="experimental-features = nix-command flakes"
   script:
-    - nixos-rebuild dry-build --flake .#odinson
+    - nix flake update
+    - nix build .#nixosConfigurations.${HOSTNAME}.config.system.build.toplevel --dry-run
+    - nix build .#homeConfigurations.${USERNAME}@${HOSTNAME}.activationPackage
