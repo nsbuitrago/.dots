@@ -17,6 +17,7 @@ of this config and sourced. This way, they are easy to update and backup in this
 think this is a much better method compared to using nix. For other configurations outside of these,
 (e.g., firefox), the Nix way makes more sense.
 
+- [x] add steam and wezterm
 - [x] add cuda support
 - [x] add garbage collection for generations older than 7d
     -[x] fix problem with gc not being found (should be nix.gc)

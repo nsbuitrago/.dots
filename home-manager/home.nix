@@ -59,10 +59,11 @@
   # zsh config
   home.file.".zshrc".source = ./dotfiles/.zshrc;
 
-  programs.kitty = {
-    enable = true;
-    theme = "Gruvbox Material Dark Hard";
-  };
+  # programs.kitty = {
+  #   enable = true;
+  #   theme = "Gruvbox Material Dark Hard";
+  # };
+  programs.wezterm.enable = true;
 
   programs.starship = { 
     enable = true;
