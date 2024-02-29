@@ -57,7 +57,7 @@
   };
 
   # zsh config
-  home.file.".zshrc".source = ./dotfiles/.zshrc;
+  home.file.".zshrc".source = ./configs/zshrc;
 
   programs.wezterm.enable = true;
 
@@ -74,7 +74,7 @@
   programs.ripgrep.enable = true;
   programs.fzf.enable = true;
 
-  home.file.".config/nvim".source = ./dotfiles/.config/nvim;
+  home.file.".config/nvim".source = ./configs/nvim;
 
   # browser
   programs.firefox.enable = true;
