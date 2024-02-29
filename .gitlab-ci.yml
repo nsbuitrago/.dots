@@ -14,4 +14,4 @@ build_nixos_config:
   script:
     - nix flake update
     - nix build .#nixosConfigurations.${HOSTNAME}.config.system.build.toplevel --dry-run
-    - nix build .#homeConfigurations.${USERNAME}@${HOSTNAME}.activationPackage
+    - nix build .#homeConfigurations.${USERNAME}@${HOSTNAME}.activationPackage '.?submodules=1'

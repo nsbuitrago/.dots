@@ -1,5 +1,7 @@
 # NSB's NixOS Configuration
 
+![Gitlab Pipeline Status](https://img.shields.io/gitlab/pipeline-status/nsbuitrago%2Fnixos-config)
+
 ## Hosts
 
 - odinson (main workstation)
