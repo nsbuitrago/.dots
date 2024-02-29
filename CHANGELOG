@@ -1,8 +1,13 @@
-<<<<<<< HEAD
+# 2024-02-28
+
+- Dropped steam and other games
+- use nvim submodule for easier updating
+- add rebuild.sh script for easier rebuilding
+
 # 2024-02-18
 
 - Add steam and switch kitty for wezterm
-=======
+#
 # 2024-02-12
 
 Fix GitLab CI for testing nixos config builds
@@ -10,7 +15,6 @@ Fix GitLab CI for testing nixos config builds
 # 2024-02-11
 
 - Fix cuda support
->>>>>>> fe8303d16b0746e0a1205b1d759a35e4a5fcfd4d
 
 # 2024-02-10
 
