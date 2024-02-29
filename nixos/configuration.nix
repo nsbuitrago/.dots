@@ -153,6 +153,7 @@
      ncurses5
      stdenv.cc
      binutils
+     unzip
   ];
 
   # tailscale

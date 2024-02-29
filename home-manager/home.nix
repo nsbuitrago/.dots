@@ -43,9 +43,10 @@
     homeDirectory = "/home/${nsbUser}";
   };
 
-  # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
+  home.packages = with pkgs; [ 
+    nodejs # the following 2 pkgs are soft dependencies for nvim
+    fd
+  ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
@@ -60,11 +61,15 @@
   home.file.".zshrc".source = ./configs/zshrc;
 
   programs.wezterm.enable = true;
+  programs.zoxide.enable = true;
+  programs.lazygit.enable = true;
 
   programs.starship = { 
     enable = true;
     enableZshIntegration = true;
   };
+
+  home.file.".config/starship.toml".source = ./configs/starship.toml;
 
   programs.neovim = {
     defaultEditor = true;
