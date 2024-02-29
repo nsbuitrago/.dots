@@ -120,9 +120,6 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-  # steam
-  programs.steam.enable = true;
-
   # nsb user
   users.users."${nsbUser}" = {
     isNormalUser = true;
@@ -156,7 +153,6 @@
      ncurses5
      stdenv.cc
      binutils
-     python3
   ];
 
   # tailscale

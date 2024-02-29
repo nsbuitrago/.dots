@@ -59,10 +59,6 @@
   # zsh config
   home.file.".zshrc".source = ./dotfiles/.zshrc;
 
-  # programs.kitty = {
-  #   enable = true;
-  #   theme = "Gruvbox Material Dark Hard";
-  # };
   programs.wezterm.enable = true;
 
   programs.starship = { 
@@ -70,7 +66,6 @@
     enableZshIntegration = true;
   };
 
-  # Neovim editor
   programs.neovim = {
     defaultEditor = true;
   };
@@ -82,7 +77,6 @@
   home.file.".config/nvim".source = ./dotfiles/.config/nvim;
 
   # browser
-
   programs.firefox.enable = true;
 
   # Nicely reload system units when changing configs
