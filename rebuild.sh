@@ -9,7 +9,7 @@ if [ -z $rebuild_type ]; then
 elif [ $rebuild_type == "system" ]; then
 	sudo nixos-rebuild switch --flake
 elif [ $rebuild_type == "home" ]; then
-	home-manager switch --flake '.?submodules=1'
+	home-manager switch --flake 
 else
 	echo "Invalid rebuild type. Please provide either system or home"
 	exit 1

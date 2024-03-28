@@ -28,7 +28,8 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    nsbUser = "nsb";
+    nsbUser = "nsbuitrago";
+    chillweiUser = "chillwei";
     odinsonHostname = "odinson";
   in {
     # NixOS configuration entrypoint
@@ -48,7 +49,14 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs nsbUser;};
         # > main home-manager configuration file <
-        modules = [./home-manager/home.nix];
+        modules = [./home-manager/nsb-home.nix];
+      };
+
+      "${chillweiUser}@${odinsonHostname}" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = {inherit inputs outputs chillweiUser;};
+        # > main home-manager configuration file <
+        modules = [./home-manager/chillwei-home.nix];
       };
     };
   };

@@ -46,21 +46,15 @@
   home.packages = with pkgs; [ 
     nodejs # the following 2 pkgs are soft dependencies for nvim
     fd
+    stow
   ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
 
-  programs.git = {
-    enable = true;
-    userName = "NSBuitrago";
-    userEmail = "nsb5@rice.edu";
-  };
+  programs.git.enable = true;
+  programs.gh.enable = true;
 
-  # zsh config
-  home.file.".zshrc".source = ./configs/zshrc;
-
-  programs.wezterm.enable = true;
   programs.zoxide.enable = true;
   programs.lazygit.enable = true;
 
@@ -69,8 +63,6 @@
     enableZshIntegration = true;
   };
 
-  home.file.".config/starship.toml".source = ./configs/starship.toml;
-
   programs.neovim = {
     defaultEditor = true;
   };
@@ -78,11 +70,6 @@
   # soft dependencies for nvim configuration
   programs.ripgrep.enable = true;
   programs.fzf.enable = true;
-
-  home.file.".config/nvim".source = ./configs/nvim;
-
-  # browser
-  programs.firefox.enable = true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
