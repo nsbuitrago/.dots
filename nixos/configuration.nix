@@ -6,6 +6,7 @@
   config,
   pkgs,
   nsbUser,
+  chillweiUser,
   odinsonHostname,
   ...
 }: {
@@ -138,6 +139,7 @@
      stdenv.cc
      binutils
      unzip
+     cockpit
   ];
 
   # tailscale

@@ -36,7 +36,7 @@
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       odinson = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs nsbUser odinsonHostname;};
+        specialArgs = {inherit inputs outputs nsbUser chillweiUser odinsonHostname;};
         # > main nixos configuration file <
         modules = [./nixos/configuration.nix];
       };
