@@ -3,8 +3,10 @@
 ## Hosts
 
 - odinson (ML/Compute workstation)
-    - users:
-    - nsb
-    - chillwei
+- hodgkin (macbook) (WIP)
 
-NSBuitrago: <nsb5@rice.edu>
+## Users
+
+- nsbuitrago
+- chillwei
+

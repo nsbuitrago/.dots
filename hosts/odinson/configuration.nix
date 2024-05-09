@@ -7,7 +7,6 @@
   pkgs,
   nsbUser,
   chillweiUser,
-  odinsonHostname,
   ...
 }: {
   # You can import other NixOS modules here
@@ -47,7 +46,7 @@
   };
 
   # Set your hostname
-  networking.hostName = "${odinsonHostname}";
+  networking.hostName = "odinson";
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
@@ -55,6 +54,18 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  virtualisation.containers.enable = true;
+  virtualisation = {
+    podman = {
+      enable = true;
+
+      # Create a `docker` alias for podman, to use it as a drop-in replacement
+      dockerCompat = true;
+
+      # Required for containers under podman-compose to be able to talk to each other.
+      defaultNetwork.settings.dns_enabled = true;
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -139,7 +150,9 @@
      stdenv.cc
      binutils
      unzip
-     cockpit
+     dive
+     podman-tui
+     podman-compose
   ];
 
   # tailscale
