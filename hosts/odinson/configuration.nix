@@ -153,10 +153,19 @@
      dive
      podman-tui
      podman-compose
+     jellyfin
+     jellyfin-web
+     jellyfin-ffmpeg
   ];
 
   # tailscale
   services.tailscale.enable = true;
+
+  # jellyfin
+  services.jellyfin = {
+    enable = true;
+    user="${nsbUser}";
+  };
 
   networking.firewall = {
     enable = true;
