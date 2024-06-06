@@ -5,7 +5,6 @@
   lib,
   config,
   pkgs,
-  nsbUser,
   ...
 }: {
   # You can import other home-manager modules here
@@ -39,14 +38,14 @@
   };
 
   home = {
-    username = "chillwei";
-    homeDirectory = "/home/chillwei";
+    username = "guest";
+    homeDirectory = "/home/guest";
   };
 
-  home.packages = with pkgs; [ 
+  # home.packages = with pkgs; [ 
     # add your packges here
-    fastp
-  ];
+    # fastp
+  # ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
