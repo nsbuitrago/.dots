@@ -85,10 +85,21 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Configure keymap in X11
+  # Configure keymap in X11 and setup i3 window manager
   services.xserver = {
     xkb.layout = "us";
     xkb.variant = "";
+
+    desktopManager.xterm.enable = false;
+    displayManager = defaultSession = "none+i3";
+    windowManager.i3 = {
+      enable = true;
+      extraPackages = with pkgs; [
+        dmenu # application launcher
+        i3status # default i3 status bar
+        i3lock # screen locker
+      ];
+    };
   };
 
   # Nvidia support
