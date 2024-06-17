@@ -10,7 +10,7 @@
 # N         N NB B B B B B
 
 {
-  description = "NSBuitrago's NixOS Configuration";
+  description = "NSBuitrago's NixOS Configurations";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -49,12 +49,6 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs chillweiUser;};
         modules = [./users/chillwei/home.nix];
-      };
-
-      "guest@odinson" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs chillweiUser;};
-        modules = [./users/guest/home.nix];
       };
     };
   };
