@@ -91,15 +91,6 @@
     xkb.variant = "";
 
     desktopManager.xterm.enable = false;
-    displayManager = defaultSession = "none+i3";
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-        dmenu # application launcher
-        i3status # default i3 status bar
-        i3lock # screen locker
-      ];
-    };
   };
 
   # Nvidia support
@@ -134,9 +125,10 @@
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
-  users.users."guest" = {
+  users.users."jb253" = {
     isNormalUser = true;
-    description = "guest";
+    description = "jb253";
+    extraGroups = [ "networkmanager" ];
   };
 
   # List packages installed in system profile. To search, run:
@@ -166,22 +158,14 @@
      stdenv.cc
      binutils
      unzip
+     zip
      dive
      podman-tui
      podman-compose
-     jellyfin
-     jellyfin-web
-     jellyfin-ffmpeg
   ];
 
   # tailscale
   services.tailscale.enable = true;
-
-  # jellyfin
-  services.jellyfin = {
-    enable = true;
-    user="${nsbUser}";
-  };
 
   networking.firewall = {
     enable = true;

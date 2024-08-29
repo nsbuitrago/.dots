@@ -50,6 +50,12 @@
         extraSpecialArgs = {inherit inputs outputs chillweiUser;};
         modules = [./users/chillwei/home.nix];
       };
+
+      "jb253@odinson" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs chillweiUser;};
+        modules = [./users/jb253/home.nix];
+      };
     };
   };
 }
