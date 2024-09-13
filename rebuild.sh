@@ -9,7 +9,7 @@ if [ -z $rebuild_type ]; then
 elif [ $rebuild_type == "system" ]; then
 	sudo nixos-rebuild switch --flake .#"$(hostname)"
 elif [ $rebuild_type == "home" ]; then
-	home-manager switch --flake .#"$(whoami)$(hostname)"
+	home-manager switch --flake .#"$(whoami)@$(hostname)"
 else
 	echo "Invalid rebuild type. Please provide either 'system' or 'home'"
 	exit 1

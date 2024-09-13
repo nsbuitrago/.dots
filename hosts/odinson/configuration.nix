@@ -137,6 +137,7 @@
      tmux
      neovim
      git
+     git-lfs
      btop
      wget
      tailscale

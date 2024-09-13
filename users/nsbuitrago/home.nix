@@ -57,6 +57,9 @@
 
   programs.zoxide.enable = true;
   programs.lazygit.enable = true;
+  programs.wezterm.enable = true;
+  programs.zellij.enable = true;
+  home.file.".config/zellij/config.kdl".source = ./dots/zellij/config.kdl;
 
   programs.starship = { 
     enable = true;

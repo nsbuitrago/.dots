@@ -38,14 +38,14 @@
     };
 
     homeConfigurations = {
-      "${nsbUser}@odinson" = home-manager.lib.homeManagerConfiguration {
+      "nsbuitrago@odinson" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs nsbUser;};
         # > main home-manager configuration file <
         modules = [./users/nsbuitrago/home.nix];
       };
 
-      "${chillweiUser}@odinson" = home-manager.lib.homeManagerConfiguration {
+      "chillwei@odinson" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs chillweiUser;};
         modules = [./users/chillwei/home.nix];
@@ -53,7 +53,7 @@
 
       "jb253@odinson" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs chillweiUser;};
+        extraSpecialArgs = {inherit inputs outputs;};
         modules = [./users/jb253/home.nix];
       };
     };
