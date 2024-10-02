@@ -38,9 +38,10 @@
     };
   };
 
+  home.username = "nsb";
   home = {
-    username = "${nsbUser}";
-    homeDirectory = "/home/${nsbUser}";
+    #homeDirPrefix = if pkgs.stdenv.hostPlatform.isDarwin then "/Users" else "/home";
+    homeDirectory = "/Users/nsb";
   };
 
   home.packages = with pkgs; [ 
@@ -59,6 +60,7 @@
   programs.lazygit.enable = true;
   programs.wezterm.enable = true;
   programs.zellij.enable = true;
+  programs.fish.enable = true;
   home.file.".config/zellij/config.kdl".source = ./dots/zellij/config.kdl;
 
   programs.starship = { 

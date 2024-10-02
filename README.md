@@ -1,11 +1,24 @@
-# NSB's NixOS Configuration
+# NSB's dots
 
-## Hosts
+## NixOS Configuration
 
-- odinson (ML/Compute workstation)
-- hodgkin (macbook) (WIP)
+Available hosts:
 
-## Users
+- odinson
+
+## Darwin Configuration
+
+Available hosts:
+
+- hodgkin
+
+## Home Manager Configuration
+
+Run `home-manager switch --flake .#username@hostname` to apply a home
+configuration. To bootstrap, use `nix shell nixpkgs#home-manager` to
+drop into a new shell with home-manager installed.
+
+Available users:
 
 - nsbuitrago
 - chillwei
