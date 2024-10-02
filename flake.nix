@@ -1,16 +1,15 @@
-
-# N N         NB B B B B B
-# N  N        NB         B
-# N   N       NB         B
-# N    N      NB         B
-# N     N     NB B B B B B
-# N      N    NB         B
-# N       N   NB         B
-# N        N  NB         B
-# N         N NB B B B B B
+#N NN         NN   SSSSSSSSSSS  BBBBBBBBBBBB
+#N  NN        NN  SS            BB         BB
+#N   NN       NN  SS            BB         BB
+#N    NN      NN  SS            BB         BB
+#N     NN     NN   SSSSSSSSSSS  BBBBBBBBBBBB
+#N      NN    NN            SS  BB         BB
+#N       NN   NN            SS  BB         BB
+#N        NN  NN            SS  BB         BB  
+#N         NN NN  SSSSSSSSSSS   BBBBBBBBBBBB   :: :: ::
 
 {
-  description = "NSBuitrago's NixOS Configurations";
+  description = "NSB's .dots";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -42,10 +41,10 @@
     };
 
     darwinConfigurations = {
-        nsbs-Virtual-Machine = nix-darwin.lib.darwinSystem {
+        l0ki = nix-darwin.lib.darwinSystem {
             specialArgs = {inherit inputs outputs;};
             pkgs = import inputs.nixpkgs { system = "aarch64-darwin"; };
-            modules = [ ./hosts/nsbVM/configuration.nix ];
+            modules = [ ./hosts/l0ki/configuration.nix ];
         };
     };
 
@@ -53,27 +52,19 @@
       "nsbuitrago@odinson" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs nsbUser;};
-        # > main home-manager configuration file <
-        modules = [./users/nsbuitrago/home.nix];
+        modules = [./users/nsbuitrago/odinson.nix];
       };
 
-      "nsb@nsbs-Virtual-Machine" = home-manager.lib.homeManagerConfiguration {
+      "nsbuitrago@l0ki" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         extraSpecialArgs = {inherit inputs outputs nsbUser;};
-        # > main home-manager configuration file <
-        modules = [./users/nsbuitrago/home.nix];
+        modules = [./users/nsbuitrago/l0ki.nix];
       };
 
       "chillwei@odinson" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs chillweiUser;};
         modules = [./users/chillwei/home.nix];
-      };
-
-      "jb253@odinson" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./users/jb253/home.nix];
       };
     };
   };

@@ -1,31 +1,30 @@
 { pkgs, ... }:
 {
+  homebrew = {
+    enable = true;
+    brews = [
+      tailscale
+      podman
+    ];
 
-  homebrew.enable = true;
-  homebrew.brews = [
-    fish
-    starship
-    rustup
-    uv
-    go
-    fzf
-    ripgrep
-    fd
-    zoxide
-    eza
-    tailscale
-    gh
-    lazygit
-    btop
-    direnv
-  ];
+    casks = [
+      firefox
+      raycast
+      obsidian
+      inkscape
+      "nikitabobko/tap/aerospace"
+      utm
+      blender
+      screen-studio
+      microsoft-word
+      utm
+      font-jetbrains-mono
+    ];
 
-  homebrew.casks = [
-    firefox
-    wezterm
-    raycast
-    obsidian
-  ];
+    taps = [
+      "cask-fonts"
+    ];
+  };
 
   nixpkgs.config = {
     allowUnfree = true;
@@ -60,12 +59,11 @@
   system.defaults.loginwindow.GuestEnabled = false;
   system.defaults.menuExtraClock.Show24Hour = true;
   system.defaults.trackpad.Clicking = true;
-  #system.defaults.universalaccess.reduceMotion = true;
+  system.defaults.universalaccess.reduceMotion = true;
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
   system.stateVersion = 5;
-  
 }
