@@ -48,6 +48,8 @@
   programs.git.enable = true;
   programs.git.lfs.enable = true;
   programs.gh.enable = true;
+  home.file.".gitconfig" = "./dots/.gitconfig";
+
   programs.zoxide.enable = true;
   programs.eza.enable = true;
   programs.eza.enableFishIntegration = true;
@@ -62,7 +64,7 @@
   direnv.nix-direnv.enable = true;	
 
   programs.wezterm.enable = true;
-  # home.file.".config/wezterm/wezterm.lua".source = ./dots/wezterm/wezterm.lua;
+  home.file.".config/wezterm/wezterm.lua".source = ./dots/wezterm/wezterm.lua;
 
   programs.zellij.enable = true;
   home.file.".config/zellij/config.kdl".source = ./dots/zellij/config.kdl;
@@ -74,13 +76,16 @@
     enable = true;
     enableFishIntegration = true;
   };
-  # line for config file
+  home.file.".config/starship.toml".source = ./dots/starship.toml;
 
   programs.neovim = {
     enable = true;
     defaultEditor = true;
   };
-  # home.file.".config/nvim/init.lua".source = ./dots/nvim/init.lua;
+  home.file.".config/nvim".source = ./dots/nvim;
+
+  # symlink aerospace config to home directory
+  home.file.".config/aerospace/aerospace.toml".source = ./dots/aerospace/aerospace.toml;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
