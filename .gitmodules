@@ -1,0 +1,3 @@
+[submodule "users/nsbuitrago/dots/nvim"]
+	path = users/nsbuitrago/dots/nvim
+	url = https://github.com/nsbuitrago/nvim.git

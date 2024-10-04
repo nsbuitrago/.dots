@@ -5,6 +5,7 @@
   lib,
   config,
   pkgs,
+  nsbUser,
   ...
 }: {
   # You can import other home-manager modules here
@@ -37,24 +38,43 @@
     };
   };
 
+  home.username = "nsbuitrago";
   home = {
-    username = "guest";
-    homeDirectory = "/home/guest";
+    homeDirectory = "/home/nsb";
   };
 
-  # home.packages = with pkgs; [ 
-    # add your packges here
-    # fastp
-  # ];
+  home.packages = with pkgs; [ 
+    nodejs # the following 2 pkgs are soft dependencies for nvim
+    fd
+    stow
+  ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
 
   programs.git.enable = true;
+  programs.git.lfs.enable = true;
+  programs.gh.enable = true;
+
+  programs.zoxide.enable = true;
+  programs.lazygit.enable = true;
+  programs.wezterm.enable = true;
+  programs.zellij.enable = true;
+  programs.fish.enable = true;
+  home.file.".config/zellij/config.kdl".source = ./dots/zellij/config.kdl;
+
+  programs.starship = { 
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   programs.neovim = {
     defaultEditor = true;
   };
+
+  # soft dependencies for nvim configuration
+  programs.ripgrep.enable = true;
+  programs.fzf.enable = true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";

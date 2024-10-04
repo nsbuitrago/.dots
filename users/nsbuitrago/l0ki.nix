@@ -38,41 +38,57 @@
     };
   };
 
+  home.username = "nsb";
   home = {
-    username = "${nsbUser}";
-    homeDirectory = "/home/${nsbUser}";
+    homeDirectory = "/Users/nsb";
   };
 
-  home.packages = with pkgs; [ 
-    nodejs # the following 2 pkgs are soft dependencies for nvim
-    fd
-    stow
-  ];
-
-  # Enable home-manager and git
+  # enable home-manager, git, and common command line tools
   programs.home-manager.enable = true;
-
   programs.git.enable = true;
+  programs.git.lfs.enable = true;
   programs.gh.enable = true;
+  # home.file.".gitconfig".source = ./dots/.gitconfig;
 
   programs.zoxide.enable = true;
+  programs.eza.enable = true;
+  programs.eza.enableFishIntegration = true;
+  programs.fd.enable = true;
+  programs.ripgrep.enable = true;
+  programs.fzf.enable = true;
   programs.lazygit.enable = true;
-  programs.wezterm.enable = true;
+  programs.btop.enable = true;
+  programs.direnv.enable = true;
+  # enable a faster, persistent implementation of
+  # use_nix and use_flake, to replace the built-in one.
+  programs.direnv.nix-direnv.enable = true;	
+
+  #programs.wezterm.enable = true;
+  home.file."/Users/nsbuitrago/wezterm.lua".source = ./dots/wezterm/wezterm.lua;
+
   programs.zellij.enable = true;
   home.file.".config/zellij/config.kdl".source = ./dots/zellij/config.kdl;
 
+  programs.fish.enable = true;
+  # line for config file
+
   programs.starship = { 
     enable = true;
-    enableZshIntegration = true;
+    enableFishIntegration = true;
   };
+  home.file.".config/starship.toml".source = ./dots/starship.toml;
 
   programs.neovim = {
+    enable = true;
     defaultEditor = true;
   };
+  home.file.".config/nvim" = {
+    source = ./dots/nvim;
+    recursive = true;
+  };
 
-  # soft dependencies for nvim configuration
-  programs.ripgrep.enable = true;
-  programs.fzf.enable = true;
+  # symlink aerospace config to home directory
+  home.file.".config/aerospace/aerospace.toml".source = ./dots/aerospace/aerospace.toml;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
