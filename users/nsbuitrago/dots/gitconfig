@@ -1,0 +1,7 @@
+[user]
+	name = nsbuitrago
+	email = 44626938+nsbuitrago@users.noreply.github.com
+[init]
+	defaultBranch = main
+[pull]
+	rebase = false
