@@ -48,7 +48,7 @@
   programs.git.enable = true;
   programs.git.lfs.enable = true;
   programs.gh.enable = true;
-  home.file.".gitconfig" = "./dots/.gitconfig";
+  # home.file.".gitconfig".source = ./dots/.gitconfig;
 
   programs.zoxide.enable = true;
   programs.eza.enable = true;
@@ -61,10 +61,10 @@
   programs.direnv.enable = true;
   # enable a faster, persistent implementation of
   # use_nix and use_flake, to replace the built-in one.
-  direnv.nix-direnv.enable = true;	
+  programs.direnv.nix-direnv.enable = true;	
 
-  programs.wezterm.enable = true;
-  home.file.".config/wezterm/wezterm.lua".source = ./dots/wezterm/wezterm.lua;
+  #programs.wezterm.enable = true;
+  home.file."/Users/nsbuitrago/wezterm.lua".source = ./dots/wezterm/wezterm.lua;
 
   programs.zellij.enable = true;
   home.file.".config/zellij/config.kdl".source = ./dots/zellij/config.kdl;
@@ -82,7 +82,10 @@
     enable = true;
     defaultEditor = true;
   };
-  home.file.".config/nvim".source = ./dots/nvim;
+  home.file.".config/nvim" = {
+    source = ./dots/nvim;
+    recursive = true;
+  };
 
   # symlink aerospace config to home directory
   home.file.".config/aerospace/aerospace.toml".source = ./dots/aerospace/aerospace.toml;

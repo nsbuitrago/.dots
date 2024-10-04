@@ -3,26 +3,22 @@
   homebrew = {
     enable = true;
     brews = [
-      tailscale
-      podman
+      "tailscale"
+      "podman"
     ];
 
     casks = [
-      firefox
-      raycast
-      obsidian
-      inkscape
+      "firefox"
+      "wezterm"
+      "raycast"
+      "obsidian"
+      "inkscape"
       "nikitabobko/tap/aerospace"
-      utm
-      blender
-      screen-studio
-      microsoft-word
-      utm
-      font-jetbrains-mono
-    ];
-
-    taps = [
-      "cask-fonts"
+      "utm"
+      "blender"
+      "screen-studio"
+      "microsoft-word"
+      "font-jetbrains-mono"
     ];
   };
 
@@ -59,7 +55,7 @@
   system.defaults.loginwindow.GuestEnabled = false;
   system.defaults.menuExtraClock.Show24Hour = true;
   system.defaults.trackpad.Clicking = true;
-  system.defaults.universalaccess.reduceMotion = true;
+  # system.defaults.universalaccess.reduceMotion = true;
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
 

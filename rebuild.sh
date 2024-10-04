@@ -10,18 +10,18 @@ function display_help {
   echo "  home     rebuild home configuration for the current user@host"
 }
 
-if [ -z $rebuild_type ] || [ $rebuild_type == "-h" ] || $[ $rebuild_type == "--help" ]; then
+if [ -z $rebuild_type ]; then
   echo -e "Simple configuration build script (cause I always forget these commands)\n"
   display_help
   exit 1
 elif [ $rebuild_type == "nixos" ]; then
 	echo "Rebuilding NixOS system..."
 	if command -v nix 2>&1 >/dev/null; then
-		sudo nixos-rebuild switch --flake .#"$(hostname)"
+		nixos-rebuild switch --flake .#"$(hostname)"
 	else
 		echo "nix not found. Installling nix..."
 		./bootstrap/nix.sh
-		sudo nixos-rebuild switch --flake .#"$(hostname)"
+		nixos-rebuild switch --flake .#"$(hostname)"
 	fi
 elif [ $rebuild_type == "darwin" ]; then
 	if ! command -v brew 2>&1 >/dev/null; then
@@ -33,15 +33,15 @@ elif [ $rebuild_type == "darwin" ]; then
 		darwin-rebuild switch --flake .#"$(hostname)"
 	else
 		echo "nix-darwin not found. Installing nix-darwin..."
-		nix run darwin-rebuild -- switch --flake .#"$(hostname)"
+		nix run nix-darwin -- switch --flake .#"$(hostname)"
 	fi
 elif [ $rebuild_type == "home" ]; then
 	echo "Rebuilding home configuration..."
 	if command -v darwin-rebuild 2>&1 >/dev/null; then
-		home-manager switch --flake .#"$(whoami)@$(hostname)"
+		home-manager switch --flake '.?submodules=1'
 	else
 		echo "home-manager not found. Installing home-manager..."
-		nix run home-manager -- switch --flake .#"$(whoami)@$(hostname)"
+		nix run home-manager -- switch --flake '.?submodules=1'
 	fi
 else
 	echo -e "Invalid target. Please provide either nixos, darwin, or home\n"
