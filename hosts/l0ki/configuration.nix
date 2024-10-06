@@ -22,6 +22,8 @@
     ];
   };
 
+  users.users.nsbuitrago.shell = pkgs.fish;
+
   nixpkgs.config = {
     allowUnfree = true;
   };
