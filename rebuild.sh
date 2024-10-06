@@ -10,19 +10,17 @@ function display_help {
   echo "  home     rebuild home configuration for the current user@host"
 }
 
+if ! command -v nix 2>&1 >/dev/null; then
+	echo "nix not found. Installing nix..."
+	./bootstrap/nix.sh
+fi
+
 if [ -z $rebuild_type ]; then
   echo -e "Simple configuration build script (cause I always forget these commands)\n"
   display_help
   exit 1
 elif [ $rebuild_type == "nixos" ]; then
-	echo "Rebuilding NixOS system..."
-	if command -v nix 2>&1 >/dev/null; then
-		nixos-rebuild switch --flake .#"$(hostname)"
-	else
-		echo "nix not found. Installling nix..."
-		./bootstrap/nix.sh
-		nixos-rebuild switch --flake .#"$(hostname)"
-	fi
+	nixos-rebuild switch --flake .#"$(hostname)"
 elif [ $rebuild_type == "darwin" ]; then
 	if ! command -v brew 2>&1 >/dev/null; then
 		echo "brew not found. Installing brew..."
@@ -37,7 +35,7 @@ elif [ $rebuild_type == "darwin" ]; then
 	fi
 elif [ $rebuild_type == "home" ]; then
 	echo "Rebuilding home configuration..."
-	if command -v darwin-rebuild 2>&1 >/dev/null; then
+	if command -v home-manager 2>&1 >/dev/null; then
 		home-manager switch --flake '.?submodules=1'
 	else
 		echo "home-manager not found. Installing home-manager..."
