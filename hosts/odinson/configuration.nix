@@ -92,7 +92,7 @@
 
     enable = true;
     displayManager.gdm.enable = true;
-    desktopManager.gome.enable = true;
+    desktopManager.gnome.enable = true;
   };
 
   # Nvidia support
