@@ -90,13 +90,15 @@
     xkb.layout = "us";
     xkb.variant = "";
 
-    desktopManager.xterm.enable = false;
+    enable = true;
+    displayManager.gdm.enable = true;
+    desktopManager.gome.enable = true;
   };
 
   # Nvidia support
   hardware.opengl = {
     enable = true;
-    driSupport = true;
+    #driSupport = true;
     driSupport32Bit = true;
   };
 
@@ -163,6 +165,7 @@
      dive
      podman-tui
      podman-compose
+     mosh
   ];
 
   # tailscale
