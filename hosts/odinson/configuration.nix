@@ -95,6 +95,16 @@
     desktopManager.gnome.enable = true;
   };
 
+  # remote desktop
+  services.xrdp.enable = true;
+  services.xrdp.defaultWindowManager = "${pkgs.gnome3.gnome-session}/bin/gnome-session";
+  services.xrdp.openFirewall = true;
+
+  systemd.targets.sleep.enable = false;
+  systemd.targets.suspend.enable = false;
+  systemd.targets.hibernate.enable = false;
+  systemd.targets.hybrid-sleep.enable = false;
+
   # Nvidia support
   hardware.graphics = {
     enable = true;
@@ -126,9 +136,17 @@
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
+  # josefina
   users.users."jb253" = {
     isNormalUser = true;
     description = "jb253";
+    extraGroups = [ "networkmanager" ];
+  };
+
+  # szablowski lab
+  users.users."szablowskilab" = {
+    isNormalUser = true;
+    description = "SzablowskiLab";
     extraGroups = [ "networkmanager" ];
   };
 
@@ -165,6 +183,9 @@
      podman-tui
      podman-compose
      mosh
+     #gnome-remote-desktop
+     gnome3.gnome-session
+     firefox
   ];
 
   # tailscale
