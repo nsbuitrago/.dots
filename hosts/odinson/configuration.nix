@@ -89,21 +89,7 @@
   services.xserver = {
     xkb.layout = "us";
     xkb.variant = "";
-
-    enable = true;
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
   };
-
-  # remote desktop
-  services.xrdp.enable = true;
-  services.xrdp.defaultWindowManager = "${pkgs.gnome3.gnome-session}/bin/gnome-session";
-  services.xrdp.openFirewall = true;
-
-  systemd.targets.sleep.enable = false;
-  systemd.targets.suspend.enable = false;
-  systemd.targets.hibernate.enable = false;
-  systemd.targets.hybrid-sleep.enable = false;
 
   # Nvidia support
   hardware.graphics = {
@@ -160,13 +146,12 @@
      btop
      wget
      tailscale
-     cargo
      gcc
      gnumake
-     python3
      cudatoolkit
      linuxPackages.nvidia_x11
      cudaPackages.cudnn
+     nvidia-container-toolkit
      libGLU
      libGLU
      xorg.libXi
@@ -182,10 +167,6 @@
      dive
      podman-tui
      podman-compose
-     mosh
-     #gnome-remote-desktop
-     gnome3.gnome-session
-     firefox
   ];
 
   # tailscale
