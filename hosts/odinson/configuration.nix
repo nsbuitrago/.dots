@@ -89,6 +89,9 @@
   services.xserver = {
     xkb.layout = "us";
     xkb.variant = "";
+    enable = true;
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
   };
 
   # Nvidia support
@@ -96,6 +99,7 @@
     enable = true;
     enable32Bit = true;
   };
+  hardware.nvidia-container-toolkit.enable = true;
 
   services.xserver.videoDrivers = ["nvidia"];
 
@@ -107,6 +111,15 @@
     nvidiaSettings = false;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
+
+  # remote desktop
+  services.xrdp.enable = true;
+  services.xrdp.defaultWindowManager = "${pkgs.gnome3.gnome-session}/bin/gnome-session";
+  services.xrdp.openFirewall = true;
+  systemd.targets.sleep.enable = false;
+  systemd.targets.suspend.enable = false;
+  systemd.targets.hibernate.enable = false;
+  systemd.targets.hybrid-sleep.enable = false;
 
   # nsb
   users.users."${nsbUser}" = {
@@ -167,6 +180,8 @@
      dive
      podman-tui
      podman-compose
+     gnome3.gnome-session
+     firefox
   ];
 
   # tailscale
