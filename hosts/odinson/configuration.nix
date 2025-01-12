@@ -45,6 +45,12 @@
     auto-optimise-store = true;
   };
 
+  fileSystems."/shared/data2" = {
+    device = "UUID=8ab5db06-2328-41c7-a852-35b7d9271173";
+    fsType = "ext4";
+    options = ["nofail"];
+  };
+
   # Set your hostname
   networking.hostName = "odinson";
 
@@ -59,12 +65,11 @@
     podman = {
       enable = true;
 
-      # Create a `docker` alias for podman, to use it as a drop-in replacement
-      dockerCompat = true;
-
       # Required for containers under podman-compose to be able to talk to each other.
       defaultNetwork.settings.dns_enabled = true;
     };
+
+    docker.enable = true;
   };
 
   # Set your time zone.
@@ -85,12 +90,13 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Configure keymap in X11 and setup i3 window manager
+  # Configure keymap in X11
   services.xserver = {
+    enable = true;
     xkb.layout = "us";
     xkb.variant = "";
   };
-
+  
   # Nvidia support
   hardware.graphics = {
     enable = true;
@@ -113,28 +119,28 @@
   users.users."${nsbUser}" = {
     isNormalUser = true;
     description = "nsb";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
 
   # chillwei
   users.users."${chillweiUser}" = {
     isNormalUser = true;
     description = "chillwei";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
 
   # josefina
   users.users."jb253" = {
     isNormalUser = true;
     description = "jb253";
-    extraGroups = [ "networkmanager" ];
+    extraGroups = [ "networkmanager" "docker" ];
   };
 
   # szablowski lab
   users.users."szablowskilab" = {
     isNormalUser = true;
     description = "SzablowskiLab";
-    extraGroups = [ "networkmanager" ];
+    extraGroups = [ "networkmanager" "docker" ];
   };
 
   # List packages installed in system profile. To search, run:
@@ -168,6 +174,7 @@
      dive
      podman-tui
      podman-compose
+     docker-compose
   ];
 
   # tailscale
