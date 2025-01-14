@@ -46,9 +46,9 @@
   };
 
   fileSystems."/shared/data2" = {
-    device = "UUID=8ab5db06-2328-41c7-a852-35b7d9271173";
+    device = "/dev/disk/by-uuid/8ab5db06-2328-41c7-a852-35b7d9271173";
     fsType = "ext4";
-    options = ["nofail"];
+    options = ["nofail" "users"];
   };
 
   # Set your hostname
