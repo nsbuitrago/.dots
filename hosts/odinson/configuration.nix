@@ -45,6 +45,8 @@
     auto-optimise-store = true;
   };
 
+  nix.package = pkgs.nixVersions.latest;
+
   fileSystems."/shared/data2" = {
     device = "/dev/disk/by-uuid/8ab5db06-2328-41c7-a852-35b7d9271173";
     fsType = "ext4";
@@ -96,7 +98,7 @@
     xkb.layout = "us";
     xkb.variant = "";
   };
-  
+
   # Nvidia support
   hardware.graphics = {
     enable = true;
@@ -152,7 +154,6 @@
      git-lfs
      btop
      wget
-     tailscale
      gcc
      gnumake
      cudatoolkit
@@ -179,12 +180,13 @@
 
   # tailscale
   services.tailscale.enable = true;
+  services.tailscale.package = inputs.tailscale.packages.${pkgs.system}.tailscale;
 
   networking.firewall = {
     enable = true;
     trustedInterfaces = [ "tailscale0" ];
     allowedUDPPorts = [ config.services.tailscale.port ];
-    allowedTCPPorts = [ 22 ];
+    allowedTCPPorts = [ 22 80 443 ];
   };
 
   # zsh

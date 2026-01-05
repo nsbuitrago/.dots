@@ -1,4 +1,4 @@
-#N NN         NN   SSSSSSSSSSS  BBBBBBBBBBBB
+#NNNN         NN   SSSSSSSSSSS  BBBBBBBBBBBB
 #N  NN        NN  SS            BB         BB
 #N   NN       NN  SS            BB         BB
 #N    NN      NN  SS            BB         BB
@@ -6,7 +6,7 @@
 #N      NN    NN            SS  BB         BB
 #N       NN   NN            SS  BB         BB
 #N        NN  NN            SS  BB         BB  
-#N         NN NN  SSSSSSSSSSS   BBBBBBBBBBBB   :: :: ::
+#N         NNNNN  SSSSSSSSSSS   BBBBBBBBBBBB   :: :: ::
 
 {
   description = "NSB's .dots";
@@ -19,6 +19,8 @@
 
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
+    tailscale.url = "https://flakehub.com/f/tailscale/tailscale/1.90.6";
   };
 
   outputs = {
@@ -26,6 +28,7 @@
     nixpkgs,
     nix-darwin,
     home-manager,
+    tailscale,
     ...
   } @ inputs: let
     inherit (self) outputs;

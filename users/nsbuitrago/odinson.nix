@@ -40,13 +40,14 @@
 
   home.username = "nsbuitrago";
   home = {
-    homeDirectory = "/home/nsb";
+    homeDirectory = "/home/nsbuitrago";
   };
 
   home.packages = with pkgs; [ 
     nodejs # the following 2 pkgs are soft dependencies for nvim
     fd
     stow
+    claude-code
   ];
 
   # Enable home-manager and git
