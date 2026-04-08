@@ -47,7 +47,7 @@
 
   nix.package = pkgs.nixVersions.latest;
 
-  fileSystems."/shared/data2" = {
+  fileSystems."/shared/scratch" = {
     device = "/dev/disk/by-uuid/8ab5db06-2328-41c7-a852-35b7d9271173";
     fsType = "ext4";
     options = ["nofail" "users"];
@@ -92,13 +92,6 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Configure keymap in X11
-  services.xserver = {
-    enable = true;
-    xkb.layout = "us";
-    xkb.variant = "";
-  };
-
   # Nvidia support
   hardware.graphics = {
     enable = true;
@@ -106,7 +99,13 @@
   };
   hardware.nvidia-container-toolkit.enable = true;
 
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver = {
+    enable = true;
+    xkb.layout = "us";
+    xkb.variant = "";
+
+    videoDrivers = ["nvidia"];
+  };
 
   hardware.nvidia = {
     modesetting.enable = true;
@@ -131,20 +130,6 @@
     extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
 
-  # josefina
-  users.users."jb253" = {
-    isNormalUser = true;
-    description = "jb253";
-    extraGroups = [ "networkmanager" "docker" ];
-  };
-
-  # szablowski lab
-  users.users."szablowskilab" = {
-    isNormalUser = true;
-    description = "SzablowskiLab";
-    extraGroups = [ "networkmanager" "docker" ];
-  };
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -162,10 +147,10 @@
      nvidia-container-toolkit
      libGLU
      libGLU
-     xorg.libXi
-     xorg.libXmu
-     xorg.libXv
-     xorg.libXrandr
+     libxi
+     libxmu
+     libxv
+     libxrandr
      zlib
      ncurses5
      stdenv.cc
@@ -176,6 +161,7 @@
      podman-tui
      podman-compose
      docker-compose
+     rclone
   ];
 
   # tailscale
@@ -189,9 +175,34 @@
     allowedTCPPorts = [ 22 80 443 ];
   };
 
+  # samba share
+  services.samba = {
+    enable = true;
+    openFirewall = true;
+    settings = {
+      global = {
+        "workgroup" = "WORKGROUP";
+        "server string" = "smbnix";
+        "security" = "user";
+        # Only allow Tailscale + local
+        "hosts allow" = "100. 192.168. 127.0.0.1";
+        "hosts deny" = "0.0.0.0/0";
+      };
+      homes = {
+        "path" = "/home/nsbuitrago";
+        "valid users" = "nsbuitrago";
+        "read only" = "no";
+        "browseable" = "yes";
+      };
+    };
+  };
+
   # zsh
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
+
+  # dynamic linking
+  programs.nix-ld.enable = true;
 
   # garbage collection
   nix.gc = {

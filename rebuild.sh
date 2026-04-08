@@ -36,10 +36,10 @@ elif [ $rebuild_type == "darwin" ]; then
 elif [ $rebuild_type == "home" ]; then
 	echo "Rebuilding home configuration..."
 	if command -v home-manager 2>&1 >/dev/null; then
-		home-manager switch --flake '.?submodules=1'
+		home-manager switch --flake .
 	else
 		echo "home-manager not found. Installing home-manager..."
-		nix run home-manager -- switch --flake '.?submodules=1'
+		nix run home-manager -- switch --flake .
 	fi
 else
 	echo -e "Invalid target. Please provide either nixos, darwin, or home\n"

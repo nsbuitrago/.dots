@@ -47,7 +47,8 @@
     nodejs # the following 2 pkgs are soft dependencies for nvim
     fd
     stow
-    claude-code
+    opencode
+    python313Packages.huggingface-hub
   ];
 
   # Enable home-manager and git
@@ -59,10 +60,6 @@
 
   programs.zoxide.enable = true;
   programs.lazygit.enable = true;
-  programs.wezterm.enable = true;
-  programs.zellij.enable = true;
-  programs.fish.enable = true;
-  home.file.".config/zellij/config.kdl".source = ./dots/zellij/config.kdl;
 
   programs.starship = { 
     enable = true;
@@ -72,6 +69,8 @@
   programs.neovim = {
     defaultEditor = true;
   };
+
+  programs.zellij.enable = true;
 
   # soft dependencies for nvim configuration
   programs.ripgrep.enable = true;
