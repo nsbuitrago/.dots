@@ -47,6 +47,7 @@
 
   nix.package = pkgs.nixVersions.latest;
 
+  # disks and backup
   fileSystems."/shared/scratch" = {
     device = "/dev/disk/by-uuid/8ab5db06-2328-41c7-a852-35b7d9271173";
     fsType = "ext4";
@@ -58,6 +59,35 @@
     fsType = "ext4";
     options = ["nofail" "users"];
   };
+
+  services.restic.backups.main = {
+    initialize = true;
+    repository = "b2:odinson-backup:restic";
+    paths = [
+      "/home/nsbuitrago"
+      "/home/chillwei"
+    ];
+
+    exclude = [
+      "/home/*/target"
+      "/home/*/node_modules"
+      "/home/*/.venv"
+      "/home/*/.cache"
+      "/home/*/.cargo"
+    ];
+
+    passwordFile = "/etc/nixos/restic/secrets/password";
+    environmentFile = "/etc/nixos/restic/secrets/b2.env";
+    timerConfig = {
+      OnCalendar = "monthly";
+      Persistent = true;
+      RandomizedDelaySec = "1h";
+    };
+    pruneOpts = [
+      "--keep-monthly 6"
+    ];
+  };
+
 
   # Set your hostname
   networking.hostName = "odinson";
@@ -168,6 +198,7 @@
      podman-compose
      docker-compose
      rclone
+     restic
   ];
 
   # tailscale
