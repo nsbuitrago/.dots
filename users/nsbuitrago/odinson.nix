@@ -41,6 +41,15 @@
   home.username = "nsbuitrago";
   home = {
     homeDirectory = "/home/nsbuitrago";
+
+    file = {
+      ".gitconfig".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/users/nsbuitrago/dots/gitconfig";
+      ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/users/nsbuitrago/dots/zshrc";
+      ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/users/nsbuitrago/dots/starship.toml";
+      ".config/aerospace/aerospace.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/users/nsbuitrago/dots/aerospace/aerospace.toml";
+      ".config/wezterm/wezterm.lua".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/users/nsbuitrago/dots/wezterm/wezterm.lua";
+      ".config/zellij/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/users/nsbuitrago/dots/zellij/config.kdl";
+    };
   };
 
   home.packages = with pkgs; [ 
@@ -48,6 +57,8 @@
     fd
     stow
     opencode
+    pi-coding-agent
+    codex
     python313Packages.huggingface-hub
   ];
 

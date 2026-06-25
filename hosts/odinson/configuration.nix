@@ -53,6 +53,12 @@
     options = ["nofail" "users"];
   };
 
+  fileSystems."/shared/storage" = {
+    device = "/dev/disk/by-uuid/44c676bf-fbdd-45bc-a0c4-6defadbfd916";
+    fsType = "ext4";
+    options = ["nofail" "users"];
+  };
+
   # Set your hostname
   networking.hostName = "odinson";
 
