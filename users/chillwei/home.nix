@@ -46,6 +46,7 @@
   home.packages = with pkgs; [ 
     # add your packges here
     fastp
+    claude-code
   ];
 
   # Enable home-manager and git

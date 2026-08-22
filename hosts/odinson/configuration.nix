@@ -66,6 +66,8 @@
     paths = [
       "/home/nsbuitrago"
       "/home/chillwei"
+      "/shared/projects"
+      "/shared/storage"
     ];
 
     exclude = [
@@ -171,6 +173,7 @@
   environment.systemPackages = with pkgs; [
      tmux
      neovim
+     helix
      git
      git-lfs
      btop
@@ -199,6 +202,9 @@
      docker-compose
      rclone
      restic
+     codex
+     eza
+     jujutsu
   ];
 
   # tailscale
@@ -228,6 +234,27 @@
       homes = {
         "path" = "/home/nsbuitrago";
         "valid users" = "nsbuitrago";
+        "read only" = "no";
+        "browseable" = "yes";
+      };
+
+      chillwei = {
+        "path" = "/home/chillwei";
+        "valid users" = "chillwei";
+        "read only" = "no";
+        "browseable" = "yes";
+      };
+
+      shared_projects = {
+        "path" = "/shared/projects";
+        "valid users" = "nsbuitrago chillwei";
+        "read only" = "no";
+        "browseable" = "yes";
+      };
+
+      shared_projects = {
+        "path" = "/shared";
+        "valid users" = "nsbuitrago chillwei";
         "read only" = "no";
         "browseable" = "yes";
       };

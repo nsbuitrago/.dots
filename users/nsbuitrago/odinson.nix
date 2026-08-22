@@ -49,16 +49,11 @@
       ".config/aerospace/aerospace.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/users/nsbuitrago/dots/aerospace/aerospace.toml";
       ".config/wezterm/wezterm.lua".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/users/nsbuitrago/dots/wezterm/wezterm.lua";
       ".config/zellij/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/users/nsbuitrago/dots/zellij/config.kdl";
+      ".config/helix/config.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/users/nsbuitrago/dots/helix/config.toml";
     };
   };
 
   home.packages = with pkgs; [ 
-    nodejs # the following 2 pkgs are soft dependencies for nvim
-    fd
-    stow
-    opencode
-    pi-coding-agent
-    codex
     python313Packages.huggingface-hub
   ];
 
@@ -77,9 +72,9 @@
     enableZshIntegration = true;
   };
 
-  programs.neovim = {
-    defaultEditor = true;
-  };
+  # programs.neovim = {
+  #   defaultEditor = true;
+  # };
 
   programs.zellij.enable = true;
 
