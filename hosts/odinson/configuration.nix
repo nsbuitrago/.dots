@@ -12,6 +12,7 @@
   # You can import other NixOS modules here
   imports = [
     ./hardware-configuration.nix
+    ./forgejo.nix
   ];
 
   nixpkgs = {
@@ -68,6 +69,7 @@
       "/home/chillwei"
       "/shared/projects"
       "/shared/storage"
+      "/var/lib/forgejo"
     ];
 
     exclude = [
@@ -215,13 +217,13 @@
     enable = true;
     trustedInterfaces = [ "tailscale0" ];
     allowedUDPPorts = [ config.services.tailscale.port ];
-    allowedTCPPorts = [ 22 80 443 ];
   };
 
   # samba share
   services.samba = {
     enable = true;
-    openFirewall = true;
+    # tailscale0 is trusted above; do not expose SMB on LAN/WAN interfaces.
+    openFirewall = false;
     settings = {
       global = {
         "workgroup" = "WORKGROUP";
@@ -252,7 +254,7 @@
         "browseable" = "yes";
       };
 
-      shared_projects = {
+      shared = {
         "path" = "/shared";
         "valid users" = "nsbuitrago chillwei";
         "read only" = "no";

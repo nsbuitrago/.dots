@@ -46,8 +46,6 @@
       ".gitconfig".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/users/nsbuitrago/dots/gitconfig";
       ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/users/nsbuitrago/dots/zshrc";
       ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/users/nsbuitrago/dots/starship.toml";
-      ".config/aerospace/aerospace.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/users/nsbuitrago/dots/aerospace/aerospace.toml";
-      ".config/wezterm/wezterm.lua".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/users/nsbuitrago/dots/wezterm/wezterm.lua";
       ".config/zellij/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/users/nsbuitrago/dots/zellij/config.kdl";
       ".config/helix/config.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/users/nsbuitrago/dots/helix/config.toml";
     };
@@ -72,15 +70,7 @@
     enableZshIntegration = true;
   };
 
-  # programs.neovim = {
-  #   defaultEditor = true;
-  # };
-
   programs.zellij.enable = true;
-
-  # soft dependencies for nvim configuration
-  programs.ripgrep.enable = true;
-  programs.fzf.enable = true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
