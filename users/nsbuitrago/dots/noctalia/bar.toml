@@ -1,0 +1,4 @@
+[bar.default]
+start = ["clock"]
+center = ["workspaces"]
+end = ["tray", "notifications", "clipboard", "network", "bluetooth", "volume", "brightness", "battery", "control-center", "session"]

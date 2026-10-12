@@ -17,10 +17,9 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    nix-darwin.url = "github:LnL7/nix-darwin";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-
     tailscale.url = "https://flakehub.com/f/tailscale/tailscale/1.90.6";
+
+    noctalia.url = "github:noctalia-dev/noctalia/cachix";
   };
 
   outputs = {
@@ -43,25 +42,11 @@
       };
     };
 
-    darwinConfigurations = {
-        l0ki = nix-darwin.lib.darwinSystem {
-            specialArgs = {inherit inputs outputs;};
-            pkgs = import inputs.nixpkgs { system = "aarch64-darwin"; };
-            modules = [ ./hosts/l0ki/configuration.nix ];
-        };
-    };
-
     homeConfigurations = {
       "nsbuitrago@odinson" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs nsbUser;};
         modules = [./users/nsbuitrago/odinson.nix];
-      };
-
-      "nsbuitrago@l0ki" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-        extraSpecialArgs = {inherit inputs outputs nsbUser;};
-        modules = [./users/nsbuitrago/l0ki.nix];
       };
 
       "chillwei@odinson" = home-manager.lib.homeManagerConfiguration {

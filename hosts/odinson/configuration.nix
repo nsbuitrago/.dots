@@ -13,14 +13,15 @@
   imports = [
     ./hardware-configuration.nix
     ./forgejo.nix
+    inputs.noctalia.nixosModules.default
   ];
 
   nixpkgs = {
     # Configure your nixpkgs instance
     config = {
       allowUnfree = true;
-      cudaSupport = true;
-      cudaVersion = "12";
+      # cudaSupport = true;
+      # cudaVersion = "12";
     };
   };
 
@@ -41,9 +42,13 @@
 
   nix.settings = {
     # Enable flakes and new 'nix' command
-    experimental-features = "nix-command flakes";
+    experimental-features = ["nix-command" "flakes"];
     # Deduplicate and optimize nix store
     auto-optimise-store = true;
+    extra-substituters = [ "https://noctalia.cachix.org" ];
+    extra-trusted-public-keys = [
+      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+    ];
   };
 
   nix.package = pkgs.nixVersions.latest;
@@ -139,13 +144,7 @@
   };
   hardware.nvidia-container-toolkit.enable = true;
 
-  services.xserver = {
-    enable = true;
-    xkb.layout = "us";
-    xkb.variant = "";
-
-    videoDrivers = ["nvidia"];
-  };
+  services.xserver.videoDrivers = ["nvidia"];
 
   hardware.nvidia = {
     modesetting.enable = true;
@@ -170,31 +169,41 @@
     extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
 
+  services.displayManager.noctalia-greeter = {
+    enable = true;
+    settings = {
+      cursor.size = 24;
+      keyboard.layout = "us";
+    };
+    cursorTheme = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Classic";
+    };
+  };
+
+  programs = {
+    dconf.enable = true;
+    niri.enable = true;
+    noctalia = {
+      enable = true;
+      recommendedServices.enable = true;
+    };
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-     tmux
-     neovim
      helix
+     ghostty
      git
      git-lfs
      btop
      wget
-     gcc
-     gnumake
-     cudatoolkit
-     linuxPackages.nvidia_x11
-     cudaPackages.cudnn
-     nvidia-container-toolkit
-     libGLU
-     libGLU
-     libxi
-     libxmu
-     libxv
-     libxrandr
-     zlib
-     ncurses5
-     stdenv.cc
+     # gcc
+     # gnumake
+     # cudatoolkit
+     # cudaPackages.cudnn
+     # nvidia-container-toolkit
      binutils
      unzip
      zip
@@ -207,11 +216,49 @@
      codex
      eza
      jujutsu
+     gvfs
+     nautilus
+     xwayland-satellite
+     wl-clipboard
+     brightnessctl
+     playerctl
+     brave-origin
+     loupe
+     file-roller
+     whitesur-icon-theme
   ];
+
+  fonts.packages = with pkgs; [
+    corefonts
+    nerd-fonts.jetbrains-mono
+  ];
+
+
+  security.polkit.enable = true;
+  security.pam.services.greetd.enableGnomeKeyring = true;
+  hardware.bluetooth.enable = true;
+  services.gvfs.enable = true;
+  services.tumbler.enable = true;
+  services.udisks2.enable = true;
+  services.upower.enable = true;
+  services.power-profiles-daemon.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    wireplumber.enable = true;
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  };
 
   # tailscale
   services.tailscale.enable = true;
-  services.tailscale.package = inputs.tailscale.packages.${pkgs.system}.tailscale;
+  services.tailscale.package = inputs.tailscale.packages.${pkgs.stdenv.hostPlatform.system}.tailscale;
 
   networking.firewall = {
     enable = true;

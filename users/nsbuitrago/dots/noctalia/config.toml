@@ -1,0 +1,24 @@
+# Mac-style palette, wallpaper, and automatic day/night switching.
+# Noctalia resolves the paired palette and wallpaper from this one schedule.
+[theme]
+mode = "auto"
+shell_mode = "follow"
+source = "custom"
+custom_palette = "Omarchy Mac Style"
+
+[location]
+# Match the Omarchy Mac Style default schedule without using geolocation.
+custom_schedule = true
+sunrise = "07:00"
+sunset = "19:00"
+
+[wallpaper]
+enabled = true
+directory = "/home/nsbuitrago/Pictures/Wallpapers/omarchy-mac-style"
+fill_mode = "crop"
+fill_color = "surface"
+transition = ["fade"]
+transition_duration = 1000
+
+[wallpaper.default]
+path = "/home/nsbuitrago/Pictures/Wallpapers/omarchy-mac-style/coastal-curves-dark.png"

@@ -1,16 +1,12 @@
-export EDITOR=nvim 
+export EDITOR=hx
 bindkey -v
 
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
 # aliases
-alias v="nvim"
-alias vi="nvim"
-alias vim="nvim"
-alias activate='source .venv/bin/activate'
 alias ls="eza --icons"
-alias vf='nvim "$(fzf)"'
+alias hf='hx "$(fzf)"'
 alias ll="ls -l"
 alias lg="lazygit"
 alias gs="git status"
@@ -23,5 +19,4 @@ cf() {
 # go
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-
-eval "$(gh copilot alias -- zsh)"
+export PATH=$PATH:$HOME/.cargo/bin
