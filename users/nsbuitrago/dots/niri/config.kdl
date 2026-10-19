@@ -14,6 +14,21 @@ input {
     mouse {
         natural-scroll
     }
+
+    focus-follows-mouse
+}
+
+cursor {
+    xcursor-theme "Bibata-Modern-Classic"
+    xcursor-size 24
+}
+
+// These values give transparent windows a soft, slightly saturated backdrop.
+blur {
+    passes 3
+    offset 3
+    noise 0.02
+    saturation 1.2
 }
 
 layout {
@@ -25,11 +40,7 @@ layout {
         proportion 0.66667
     }
     default-column-width { proportion 0.5; }
-    focus-ring {
-        width 4
-        active-color "#7fc8ff"
-        inactive-color "#505050"
-    }
+    focus-ring { off; }
     border { off; }
 }
 
@@ -42,12 +53,29 @@ debug {
     honor-xdg-activation-with-invalid-serial
 }
 
+window-rule {
+    geometry-corner-radius 10
+    clip-to-geometry true
+    draw-border-with-background false
+}
+
 // Present Noctalia settings as a sensibly-sized floating window.
 window-rule {
     match app-id="dev.noctalia.Noctalia"
     open-floating true
     default-column-width { fixed 1080; }
     default-window-height { fixed 920; }
+}
+
+// Ghostty supplies the alpha channel; Niri supplies the compositor blur.
+// Xray blur is stable and inexpensive: it blurs the wallpaper rather than
+// continually re-rendering the contents of windows underneath.
+window-rule {
+    match app-id=r#"^com\.mitchellh\.ghostty$"#
+    background-effect {
+        blur true
+        xray true
+    }
 }
 
 binds {
@@ -91,10 +119,8 @@ binds {
     Mod+Shift+Right { focus-monitor-right; }
     Mod+U { focus-workspace-down; }
     Mod+I { focus-workspace-up; }
-    Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
-    Mod+Ctrl+Page_Up { move-column-to-workspace-up; }
-    Mod+Ctrl+U { move-column-to-workspace-down; }
-    Mod+Ctrl+I { move-column-to-workspace-up; }
+    Mod+Shift+U { move-column-to-workspace-down; }
+    Mod+Shift+I { move-column-to-workspace-up; }
     Mod+1 { focus-workspace 1; }
     Mod+2 { focus-workspace 2; }
     Mod+3 { focus-workspace 3; }
@@ -136,8 +162,8 @@ binds {
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
     Mod+W { toggle-column-tabbed-display; }
 
-    Print { spawn-sh "noctalia msg screenshot-region"; }
-    Ctrl+Print { spawn-sh "noctalia msg screenshot-fullscreen"; }
+    Mod+F3 { spawn-sh "noctalia msg screenshot-region"; }
+    Mod+Shift+F3 { spawn-sh "noctalia msg screenshot-fullscreen"; }
     Alt+Print { spawn-sh "noctalia msg screenshot-fullscreen all"; }
 
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
