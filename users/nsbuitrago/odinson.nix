@@ -11,6 +11,7 @@
   # You can import other home-manager modules here
   imports = [
     inputs.noctalia.homeModules.default
+    inputs.vicinae.homeManagerModules.default
     # If you want to use home-manager modules from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModule
 
@@ -62,9 +63,26 @@
     python313Packages.huggingface-hub
     zed-editor
     devenv
+    inkscape
+    # zotero
+    bitwarden-desktop
+    eza
+    zoxide
+    libreoffice
+    fish
+    obsidian
+    gh
+    inputs.delta.packages.${pkgs.stdenv.hostPlatform.system}.delta
   ];
 
   programs.noctalia.enable = true;
+  programs.vicinae = {
+    enable = true;
+    systemd = {
+      enable = true;
+      autoStart = true;
+    };
+  };
 
   gtk = {
     enable = true;

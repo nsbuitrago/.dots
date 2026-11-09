@@ -20,6 +20,11 @@
     tailscale.url = "https://flakehub.com/f/tailscale/tailscale/1.90.6";
 
     noctalia.url = "github:noctalia-dev/noctalia/cachix";
+
+    delta.url = "github:zed-industries/delta-nix";
+    delta.inputs.nixpkgs.follows = "nixpkgs";
+
+    vicinae.url = "github:vicinaehq/vicinae";
   };
 
   outputs = {

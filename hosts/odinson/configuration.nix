@@ -45,9 +45,10 @@
     experimental-features = ["nix-command" "flakes"];
     # Deduplicate and optimize nix store
     auto-optimise-store = true;
-    extra-substituters = [ "https://noctalia.cachix.org" ];
+    extra-substituters = [ "https://noctalia.cachix.org" "https://vicinae.cachix.org" ];
     extra-trusted-public-keys = [
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+      "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
     ];
   };
 
@@ -226,6 +227,7 @@
      loupe
      file-roller
      whitesur-icon-theme
+     rustdesk
   ];
 
   fonts.packages = with pkgs; [
@@ -253,7 +255,29 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    extraPortals = [ pkgs.xdg-desktop-portal pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-gnome ];
+    wlr.enable = true;
+    config.niri = {
+      # Niri's default portal routing handles the remaining interfaces through
+      # GNOME/GTK. RustDesk needs the wlroots portal specifically for capture.
+      "org.freedesktop.impl.portal.ScreenCast" = "wlr";
+      "org.freedesktop.impl.portal.Screenshot" = "wlr";
+    };
+  };
+
+  # Run RustDesk in privileged service mode. This makes its Wayland path use
+  # the ScreenCast portal and uinput rather than the unavailable
+  # RemoteDesktop portal on Niri, and also enables unattended access.
+  systemd.services.rustdesk = {
+    description = "RustDesk remote-desktop service";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.rustdesk}/bin/rustdesk --service";
+      Restart = "always";
+      RestartSec = 3;
+    };
   };
 
   # tailscale

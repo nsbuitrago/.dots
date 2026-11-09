@@ -83,7 +83,7 @@ binds {
 
     Mod+Return hotkey-overlay-title="Open Ghostty" { spawn "ghostty"; }
     Mod+B hotkey-overlay-title="Open Brave" { spawn "brave-origin"; }
-    Mod+Space hotkey-overlay-title="Open Noctalia launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
+    Mod+Space hotkey-overlay-title="Toggle Vicinae launcher" { spawn "vicinae" "toggle"; }
     Mod+S hotkey-overlay-title="Open Noctalia control center" { spawn-sh "noctalia msg panel-toggle control-center"; }
     Mod+Shift+Comma hotkey-overlay-title="Open Noctalia settings" { spawn-sh "noctalia msg settings-toggle"; }
     Super+Alt+L hotkey-overlay-title="Lock the screen" { spawn "noctalia" "msg" "session" "lock"; }
